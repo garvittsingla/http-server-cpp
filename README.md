@@ -27,7 +27,7 @@ When you visit `www.google.com`:
 - Your browser (client) creates a socket
 - Google's server has a socket listening for connections
 - They connect and exchange data (your search request and results)
-- The connection closes when done
+- The connectionexi closes when done
 
 ---
 
