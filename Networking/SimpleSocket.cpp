@@ -1,4 +1,4 @@
-#include <SimpleSocket.hpp>
+#include "SimpleSocket.hpp"
 
 HDE::SimpleSocket::SimpleSocket(int domain,int service,int protocol,int port,u_long interface){
     address.sin_family = domain;
@@ -6,8 +6,6 @@ HDE::SimpleSocket::SimpleSocket(int domain,int service,int protocol,int port,u_l
     address.sin_addr.s_addr = htonl(interface);
     sock = socket(domain, service, protocol);
     test_connection(sock);
-    connection = connect_to_network(sock,address);
-    test_connection(connection);
 }
 void HDE::SimpleSocket::test_connection(int item_to_test){
     if(item_to_test<0){
@@ -23,4 +21,8 @@ int HDE::SimpleSocket::get_sock(){
 }
 int HDE::SimpleSocket::get_connection(){
     return connection;
+}
+
+void HDE::SimpleSocket::set_connection(int con){
+    connection = con;
 }

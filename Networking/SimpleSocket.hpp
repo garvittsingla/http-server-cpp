@@ -1,7 +1,6 @@
 #ifndef SimpleSocket_hpp
 #define SimpleSocket_hpp
 
-#include <stdio.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include<iostream>
@@ -23,10 +22,13 @@ namespace HDE{
             //      - This class becomes abstract and cannot be instantiated directly
             //      - Derived classes MUST provide an implementation of this function
             virtual int connect_to_network(int sock, struct sockaddr_in address) = 0;
-            void test_connection(int);
+            void test_connection(int item_to_test);
             struct sockaddr_in get_address();
             int get_sock();
             int get_connection();
+
+            void set_connection(int conn);
+
     };
 }
 #endif 
