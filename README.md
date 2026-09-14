@@ -3,6 +3,8 @@
 A custom HTTP server implemented in C++ using standard UNIX socket system calls (`socket`, `bind`, `listen`, `accept`) and object-oriented networking abstractions.
 
 ---
+## Architectural diagram
+![Architecture Diagram](./docs/images/diagram.png)
 
 From the project root directory, run:
 
