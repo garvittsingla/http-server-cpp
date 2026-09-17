@@ -5,6 +5,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <cstring>
+#include <arpa/inet.h>
 
 int main() {
     HDE::ListeningSocket serverSocket(
@@ -28,7 +29,19 @@ int main() {
             continue;
         }
 
-        std::cout << "Client connected (fd: " << client_fd << ")" << std::endl;
+        char client_ip[INET_ADDRSTRLEN];
+        inet_ntop(AF_INET, &client_address.sin_addr, client_ip, INET_ADDRSTRLEN);
+        printf("Request recived from %s\n", client_ip);
+
+        char buffer[1024];
+        ssize_t bytes_received = recv(client_fd, buffer, sizeof(buffer) - 1, 0);
+        if (bytes_received < 0) {
+            perror("recv failed");
+            close(client_fd);
+            continue;
+        }
+        buffer[bytes_received] = '\0';
+        std::cout << "Received: " << buffer << std::endl;
 
         const char* response =
             "HTTP/1.1 200 OK\r\n"
